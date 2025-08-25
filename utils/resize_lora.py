@@ -4,9 +4,15 @@
 
 # Modified from kohya's resize script to allow removing of conv or linear dims
 import os
+import sys
 from pathlib import Path
 
-os.chdir("sd_scripts")
+# Fix: Use absolute path instead of chdir - prevents working directory errors
+script_dir = Path(__file__).parent.absolute()
+sd_scripts_dir = script_dir.parent / "sd_scripts"
+
+# Add sd_scripts to Python path so imports work
+sys.path.insert(0, str(sd_scripts_dir))
 
 import argparse
 import torch
